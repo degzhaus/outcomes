@@ -7,6 +7,8 @@ defmodule Outcomes.Job do
     timestamps()
 
     belongs_to :company, Outcomes.Company
+
+    has_many :applications, Outcomes.Applications
   end
 
   @doc """
@@ -17,5 +19,13 @@ defmodule Outcomes.Job do
     |> cast(params, [:name, :company_id])
     |> validate_required([:name])
     |> validate_required([:company_id])
+  end
+
+  def select_opts(jobs) do
+    Enum.flat_map jobs, fn(job) -> tuple(job) end
+  end
+
+  def tuple(job) do
+    %{"#{job.name}": job.id}
   end
 end

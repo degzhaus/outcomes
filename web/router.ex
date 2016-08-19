@@ -17,9 +17,11 @@ defmodule Outcomes.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
     resources "/users", UserController
     resources "/companies", CompanyController
     resources "/jobs", JobController
+    resources "/applications", ApplicationController
   end
 
   # Other scopes may use custom stacks.
