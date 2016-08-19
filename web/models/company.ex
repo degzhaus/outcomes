@@ -5,6 +5,8 @@ defmodule Outcomes.Company do
     field :name, :string
 
     timestamps()
+
+    has_many :jobs, Outcomes.Job
   end
 
   @doc """
@@ -14,5 +16,13 @@ defmodule Outcomes.Company do
     struct
     |> cast(params, [:name])
     |> validate_required([:name])
+  end
+
+  def select_opts(companies) do
+    Enum.flat_map companies, fn(company) -> company_tuple(company) end
+  end
+
+  def company_tuple(company) do
+    %{"#{company.name}": company.id}
   end
 end

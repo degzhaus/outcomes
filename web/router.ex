@@ -19,6 +19,7 @@ defmodule Outcomes.Router do
     get "/", PageController, :index
     resources "/users", UserController
     resources "/companies", CompanyController
+    resources "/jobs", JobController
   end
 
   # Other scopes may use custom stacks.
