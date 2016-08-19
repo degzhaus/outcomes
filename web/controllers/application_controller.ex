@@ -18,6 +18,7 @@ defmodule Outcomes.ApplicationController do
   end
 
   def create(conn, %{"application" => application_params}) do
+    IO.inspect application_params
     changeset = Application.changeset(%Application{}, application_params)
     jobs = Job.select_opts(Repo.all(Job))
     students = student_select_opts()
@@ -79,5 +80,21 @@ defmodule Outcomes.ApplicationController do
     query = from User, where: [role: "student"]
     users = Repo.all(query)
     User.student_select_opts(users)
+  end
+
+  def report(conn, _params) do
+    applications = Repo.all(Application)
+    
+    json(conn, applications: applications)
+  end
+
+  def applications_json(applications) do
+    Enum.map applications, fn(application) -> application end
+  end
+
+  def application_json(application) do
+    %{
+      application.id
+    }
   end
 end
