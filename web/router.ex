@@ -13,8 +13,13 @@ defmodule Outcomes.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser_session do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
   scope "/", Outcomes do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :browser_session] # Use the default browser stack
 
     get "/", PageController, :index
 
@@ -22,6 +27,8 @@ defmodule Outcomes.Router do
     resources "/companies", CompanyController
     resources "/jobs", JobController
     resources "/applications", ApplicationController
+
+    get "/report", ReportController, :report
   end
 
   # Other scopes may use custom stacks.

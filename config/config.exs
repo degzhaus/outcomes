@@ -35,5 +35,5 @@ config :guardian, Guardian,
   hooks: GuardianDb,
   permissions: %{
     default: [:read, :write],
-    admin: [:dashboard, :reconcile]
+    admin: [:report]
   }
