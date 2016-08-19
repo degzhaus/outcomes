@@ -1,0 +1,28 @@
+<h2>Listing jobs</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Company</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for job <- @jobs do %>
+    <tr>
+      <td><%= job.name %></td>
+      <td><%= job.company_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: job_path(@conn, :show, job), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: job_path(@conn, :edit, job), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New job", to: job_path(@conn, :new) %>
