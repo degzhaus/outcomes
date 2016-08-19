@@ -1,0 +1,23 @@
+<h2>Show application</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @application.name %>
+  </li>
+
+  <li>
+    <strong>Job:</strong>
+    <%= @application.job_id %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @application.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: application_path(@conn, :edit, @application) %>
+<%= link "Back", to: application_path(@conn, :index) %>

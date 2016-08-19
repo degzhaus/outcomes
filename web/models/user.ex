@@ -7,6 +7,8 @@ defmodule Outcomes.User do
     field :role, :string
 
     timestamps()
+
+    has_many :applications, Outcomes.Application
   end
 
   @doc """
@@ -16,5 +18,13 @@ defmodule Outcomes.User do
     struct
     |> cast(params, [:name, :password, :role])
     |> validate_required([:name, :password, :role])
+  end
+
+  def student_select_opts(students) do
+    Enum.flat_map students, fn(student) -> tuple(student) end
+  end
+
+  def tuple(student) do
+    %{"#{student.name}": student.id}
   end
 end
