@@ -25,7 +25,9 @@ defmodule Outcomes.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Outcomes do
-  #   pipe_through :api
-  # end
+  scope "/api", Outcomes do
+    pipe_through :api
+
+    get "/report", ApplicationController, :report
+  end
 end

@@ -3,6 +3,8 @@ defmodule Outcomes.Application do
 
   schema "applications" do
     field :name, :string
+    field :placed_at, Ecto.DateTime
+
     belongs_to :job, Outcomes.Job
     belongs_to :user, Outcomes.User
 
@@ -14,7 +16,7 @@ defmodule Outcomes.Application do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :job_id, :user_id])
+    |> cast(params, [:name, :job_id, :user_id], [:placed_at])
     |> validate_required([:name])
     |> validate_required([:job_id])
     |> validate_required([:user_id])
