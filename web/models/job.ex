@@ -8,7 +8,7 @@ defmodule Outcomes.Job do
 
     belongs_to :company, Outcomes.Company
 
-    has_many :applications, Outcomes.Applications
+    has_many :applications, Outcomes.Application
   end
 
   @doc """
